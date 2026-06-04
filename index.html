@@ -1,126 +1,62 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EMILY'S WIENER EMPIRE • 10M SOL PRINTER</title>
+  <title>EMILY'S WIENER EMPIRE • REAL $WIENER</title>
   <style>
-    body {
-      margin: 0;
-      padding: 20px;
-      background: linear-gradient(180deg, #1a0033, #000);
-      color: white;
-      font-family: system-ui, -apple-system, sans-serif;
-      text-align: center;
-      min-height: 100vh;
-    }
-    h1 {
-      font-size: 2.8rem;
-      background: linear-gradient(to right, #ff00ff, #ffff00);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 10px;
-    }
-    .balance {
-      font-size: 3.2rem;
-      font-weight: bold;
-      color: #00ff88;
-      margin: 20px 0;
-      text-shadow: 0 0 20px #00ff88;
-    }
-    button {
-      font-size: 1.8rem;
-      font-weight: bold;
-      padding: 25px 40px;
-      background: linear-gradient(to right, #ff0088, #8800ff);
-      border: 6px solid white;
-      border-radius: 9999px;
-      color: white;
-      margin: 20px 0;
-      cursor: pointer;
-      width: 100%;
-      max-width: 420px;
-    }
-    button:active {
-      transform: scale(0.95);
-    }
-    .result {
-      font-size: 1.6rem;
-      color: #ffff00;
-      min-height: 60px;
-      margin: 20px 0;
-    }
-    .confetti {
-      position: fixed;
-      width: 12px;
-      height: 12px;
-      animation: fall 3.5s linear forwards;
-      z-index: 999;
-    }
-    @keyframes fall {
-      to { transform: translateY(1200px) rotate(1080deg); opacity: 0; }
-    }
+    body { margin:0; padding:20px; background:linear-gradient(180deg,#1a0033,#000); color:white; font-family:system-ui; text-align:center; min-height:100vh; }
+    h1 { font-size:2.8rem; background:linear-gradient(to right,#ff00ff,#ffff00); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .balance { font-size:3rem; font-weight:bold; color:#00ff88; text-shadow:0 0 20px #00ff88; margin:20px 0; }
+    button { font-size:1.6rem; padding:20px 40px; margin:10px; border-radius:9999px; border:6px solid white; font-weight:bold; width:90%; max-width:420px; }
+    .spin-btn { background:linear-gradient(to right,#ff0088,#8800ff); }
+    .withdraw-btn { background:linear-gradient(to right,#00ff88,#0088ff); }
   </style>
 </head>
 <body>
   <h1>🌭 EMILY'S WIENER EMPIRE 🌭</h1>
-  <p style="color:#ff00ff; font-size:1.3rem;">SYDNEY DEGEN QUEEN • 10,000,000 SOL EVERY SPIN • NO RULES</p>
+  <p style="color:#ff00ff;">$WIENER TOKEN LIVE • SYDNEY DEGEN QUEEN • REAL WITHDRAW</p>
 
-  <div class="balance" id="balance">6,942,069,420 SOL</div>
+  <div class="balance" id="balance">6,942,069,420 SOL (Vibe)</div>
 
-  <button onclick="spin()">SPIN THE WIENER • PRINT 10M SOL</button>
+  <button class="spin-btn" onclick="spin()">SPIN THE WIENER • PRINT 10M SOL (VIBE)</button>
+  <button class="withdraw-btn" onclick="connectAndWithdraw()">WITHDRAW TO PHANTOM • REAL $WIENER</button>
 
-  <div class="result" id="result"></div>
-
-  <p style="margin-top:40px; opacity:0.7; font-size:0.9rem;">
-    This is how the world works, Emily.<br>
-    You take the meme → you rewrite it → you print.
-  </p>
+  <div id="status" style="margin-top:20px; color:yellow;"></div>
 
   <script>
-    let balance = 6942069420;
-    
-    // Load saved balance
-    if (localStorage.getItem('emilyBalance')) {
-      balance = parseInt(localStorage.getItem('emilyBalance'));
-    }
-    document.getElementById('balance').textContent = balance.toLocaleString() + ' SOL';
+    let balance = 694206942069;
+    let publicKey = null;
 
-    function createConfetti() {
-      for (let i = 0; i < 80; i++) {
-        const c = document.createElement('div');
-        c.className = 'confetti';
-        c.style.left = Math.random() * 100 + 'vw';
-        c.style.background = ['#ff00ff', '#00ffff', '#ffff00', '#ff8800'][Math.floor(Math.random()*4)];
-        c.style.animationDuration = (Math.random() * 2 + 2) + 's';
-        document.body.appendChild(c);
-        setTimeout(() => c.remove(), 5000);
+    // Fake spin
+    function spin() {
+      balance += 10000000;
+      document.getElementById('balance').textContent = balance.toLocaleString() + " SOL (Vibe)";
+      alert("🌭 Printed another 10M SOL in the empire!");
+    }
+
+    async function connectAndWithdraw() {
+      const status = document.getElementById('status');
+      status.textContent = "Connecting to Phantom...";
+
+      if ("solana" in window) {
+        try {
+          const resp = await window.solana.connect();
+          publicKey = resp.publicKey.toString();
+          status.innerHTML = `Connected: \( {publicKey.slice(0,6)}... \){publicKey.slice(-4)}<br>Send your $WIENER here or use Jupiter to swap.`;
+          alert("Phantom connected! Now go buy/sell real $WIENER on pump.fun or Jupiter.");
+        } catch (err) {
+          status.textContent = "Connection rejected.";
+        }
+      } else {
+        status.textContent = "Install Phantom wallet first!";
       }
     }
 
-    function spin() {
-      const btn = document.querySelector('button');
-      btn.style.opacity = '0.6';
-      btn.textContent = '🌭 SPINNING YOUR WIENER...';
-      
-      setTimeout(() => {
-        const win = 10000000;
-        balance += win;
-        
-        document.getElementById('balance').textContent = balance.toLocaleString() + ' SOL';
-        document.getElementById('result').innerHTML = `🌭 YOU JUST PRINTED ${win.toLocaleString()} SOL, SYDNEY QUEEN! 🌭`;
-        
-        createConfetti();
-        
-        alert(`🌭 EMILY CASHED ANOTHER 10,000,000 SOL 🌭\nNew Empire: ${balance.toLocaleString()} SOL`);
-        
-        localStorage.setItem('emilyBalance', balance);
-        
-        btn.style.opacity = '1';
-        btn.textContent = 'SPIN THE WIENER • PRINT 10M SOL';
-      }, 900);
-    }
+    // Auto connect check
+    window.addEventListener('load', () => {
+      document.getElementById('balance').textContent = balance.toLocaleString() + " SOL (Vibe)";
+    });
   </script>
 </body>
 </html>
