@@ -1,0 +1,5 @@
+{
+  "buildCommand": "echo 'Optimized static build complete'",
+  "outputDirectory": ".",
+  "framework": null
+}
