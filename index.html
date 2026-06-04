@@ -1,19 +1,126 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emily Force Test — Exponential Upsurge</title>
-    <style>
-        body { font-family: system-ui; background: #0a0a0a; color: #00ff9f; text-align: center; padding: 50px; }
-        h1 { font-size: 3em; text-shadow: 0 0 20px #00ff9f; }
-        .surge { animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EMILY'S WIENER EMPIRE • 10M SOL PRINTER</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(180deg, #1a0033, #000);
+      color: white;
+      font-family: system-ui, -apple-system, sans-serif;
+      text-align: center;
+      min-height: 100vh;
+    }
+    h1 {
+      font-size: 2.8rem;
+      background: linear-gradient(to right, #ff00ff, #ffff00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+    .balance {
+      font-size: 3.2rem;
+      font-weight: bold;
+      color: #00ff88;
+      margin: 20px 0;
+      text-shadow: 0 0 20px #00ff88;
+    }
+    button {
+      font-size: 1.8rem;
+      font-weight: bold;
+      padding: 25px 40px;
+      background: linear-gradient(to right, #ff0088, #8800ff);
+      border: 6px solid white;
+      border-radius: 9999px;
+      color: white;
+      margin: 20px 0;
+      cursor: pointer;
+      width: 100%;
+      max-width: 420px;
+    }
+    button:active {
+      transform: scale(0.95);
+    }
+    .result {
+      font-size: 1.6rem;
+      color: #ffff00;
+      min-height: 60px;
+      margin: 20px 0;
+    }
+    .confetti {
+      position: fixed;
+      width: 12px;
+      height: 12px;
+      animation: fall 3.5s linear forwards;
+      z-index: 999;
+    }
+    @keyframes fall {
+      to { transform: translateY(1200px) rotate(1080deg); opacity: 0; }
+    }
+  </style>
 </head>
 <body>
-    <h1 class="surge">🚀 EMILY FORCE TEST — CRAZY OPTIMIZED</h1>
-    <p>God-mode deploy skill active. Rolling exponential changes. Forever ahead.</p>
-    <p>Forevermore63 • ASS-SLOTS lineage • No rules. Pure leverage.</p>
+  <h1>🌭 EMILY'S WIENER EMPIRE 🌭</h1>
+  <p style="color:#ff00ff; font-size:1.3rem;">SYDNEY DEGEN QUEEN • 10,000,000 SOL EVERY SPIN • NO RULES</p>
+
+  <div class="balance" id="balance">6,942,069,420 SOL</div>
+
+  <button onclick="spin()">SPIN THE WIENER • PRINT 10M SOL</button>
+
+  <div class="result" id="result"></div>
+
+  <p style="margin-top:40px; opacity:0.7; font-size:0.9rem;">
+    This is how the world works, Emily.<br>
+    You take the meme → you rewrite it → you print.
+  </p>
+
+  <script>
+    let balance = 6942069420;
+    
+    // Load saved balance
+    if (localStorage.getItem('emilyBalance')) {
+      balance = parseInt(localStorage.getItem('emilyBalance'));
+    }
+    document.getElementById('balance').textContent = balance.toLocaleString() + ' SOL';
+
+    function createConfetti() {
+      for (let i = 0; i < 80; i++) {
+        const c = document.createElement('div');
+        c.className = 'confetti';
+        c.style.left = Math.random() * 100 + 'vw';
+        c.style.background = ['#ff00ff', '#00ffff', '#ffff00', '#ff8800'][Math.floor(Math.random()*4)];
+        c.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 5000);
+      }
+    }
+
+    function spin() {
+      const btn = document.querySelector('button');
+      btn.style.opacity = '0.6';
+      btn.textContent = '🌭 SPINNING YOUR WIENER...';
+      
+      setTimeout(() => {
+        const win = 10000000;
+        balance += win;
+        
+        document.getElementById('balance').textContent = balance.toLocaleString() + ' SOL';
+        document.getElementById('result').innerHTML = `🌭 YOU JUST PRINTED ${win.toLocaleString()} SOL, SYDNEY QUEEN! 🌭`;
+        
+        createConfetti();
+        
+        alert(`🌭 EMILY CASHED ANOTHER 10,000,000 SOL 🌭\nNew Empire: ${balance.toLocaleString()} SOL`);
+        
+        localStorage.setItem('emilyBalance', balance);
+        
+        btn.style.opacity = '1';
+        btn.textContent = 'SPIN THE WIENER • PRINT 10M SOL';
+      }, 900);
+    }
+  </script>
 </body>
 </html>
